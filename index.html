@@ -164,29 +164,30 @@
                         <!-- To make this form functional, sign up at-->
                         <!-- https://startbootstrap.com/solution/contact-forms-->
                         <!-- to get an API token!-->
-                        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                        <form name="submit-to-google-sheet" id="contactForm" data-sb-form-api-token="API_TOKEN">
                             <!-- Name input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="name" type="text" placeholder="Enter your name..." data-sb-validations="required" />
+                                <input class="form-control" id="name" type="text" placeholder="Enter your name..."  data-sb-validations="required" name="nama"/>
                                 <label for="name">Nama Lengkap</label>
                                 <div class="invalid-feedback" data-sb-feedback="name:required">Masukan nama.</div>
+                                
                             </div>
                             <!-- Email address input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" />
+                                <input class="form-control" id="email" type="email" placeholder="name@example.com" data-sb-validations="required,email" name="email" />
                                 <label for="email">Alamat Email</label>
                                 <div class="invalid-feedback" data-sb-feedback="email:required">Masukan email.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">Email tidak cocok.</div>
                             </div>
                             <!-- Phone number input-->
                             <div class="form-floating mb-3">
-                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" />
+                                <input class="form-control" id="phone" type="tel" placeholder="(123) 456-7890" data-sb-validations="required" name="nohandpone"/>
                                 <label for="phone">Nomber Handphone</label>
                                 <div class="invalid-feedback" data-sb-feedback="phone:required">Masukan nomber.</div>
                             </div>
                             <!-- Message input-->
                             <div class="form-floating mb-3">
-                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                                <textarea class="form-control" id="message" type="text" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required" name="pesan" ></textarea>
                                 <label for="message">Pesan</label>
                                 <div class="invalid-feedback" data-sb-feedback="message:required">Masukan pesan Pesan.</div>
                             </div>
@@ -194,21 +195,15 @@
                             <!---->
                             <!-- This is what your users will see when the form-->
                             <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    To activate this form, sign up at
-                                    <br />
-                                    <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
-                            </div>
+                            
                             <!-- Submit error message-->
                             <!---->
                             <!-- This is what your users will see when there is-->
                             <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            <!-- Submit Button-->
-                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Kirim</button>
+                            <form name="submit-to-google-sheet" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                <input type="text" name="something">
+                                <button id="submitButton" type="submit">Submit</button>
+                            </form>
                         </form>
                     </div>
                 </div>
@@ -454,5 +449,17 @@
         <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
         <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbyrpmEFRABIAJFsKjS22sXAOU0qQ0yM-7eidJJvfFneD5VxsNTHWT6UjZmzcc4Ou_kSdg/exec'
+            const form = document.forms['submit-to-google-sheet']
+          
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
     </body>
 </html>
