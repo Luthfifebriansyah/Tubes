@@ -200,9 +200,9 @@
                             <!---->
                             <!-- This is what your users will see when there is-->
                             <!-- an error submitting the form-->
-                            <form name="submit-to-google-sheet" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <input type="text" name="something">
-                                <button id="submitButton" type="submit">Submit</button>
+                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                            <!-- Submit Button-->
+                            <button class="btn btn-primary btn-xl disabled" id="submitButton" type="submit">Send</button>
                             </form>
                         </form>
                     </div>
